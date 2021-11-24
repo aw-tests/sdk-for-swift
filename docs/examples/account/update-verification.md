@@ -1,14 +1,21 @@
-/// Swift Appwrite SDK
-/// Produced by Appwrite SDK Generator
-///
+import Appwrite
 
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("5df5acd0d48c2") // Your project ID
+      .setJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ...") // Your secret JSON Web Token
 
-var client: Client = Client()
-
-client
-    .setEndpoint(endpoint: "https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject(value: "5df5acd0d48c2") // Your project ID
-
-var account: Account =  Account(client: client);
-
-var result = account.updateVerification(_userId: "[USER_ID]", _secret: "[SECRET]");
+    let account = Account(client)
+    account.updateVerification(
+        userId: "[USER_ID]",
+        secret: "[SECRET]"
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let token):
+            print(String(describing: token)
+        }
+    }
+}
