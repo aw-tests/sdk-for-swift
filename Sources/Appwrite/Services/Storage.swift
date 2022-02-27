@@ -627,7 +627,7 @@ open class Storage: Service {
         rotation: Int? = nil,
         background: String? = nil,
         output: String? = nil,
-        completion: ((Result<Any, AppwriteError>) -> Void)? = nil
+        completion: ((Result<ByteBuffer, AppwriteError>) -> Void)? = nil
     ) {
         var path: String = "/storage/buckets/{bucketId}/files/{fileId}/preview"
 
@@ -652,17 +652,14 @@ open class Storage: Service {
             "opacity": opacity,
             "rotation": rotation,
             "background": background,
-            "output": output
-        ]
-
-        let headers: [String: String] = [
-            "content-type": "application/json"
+            "output": output,
+            "project": client.config["project"],
+            "key": client.config["key"]
         ]
 
         client.call(
             method: "GET",
             path: path,
-            headers: headers,
             params: params,
             completion: completion
         )
