@@ -5,7 +5,7 @@ public class Function {
     /// Function ID.
     public let id: String
 
-    /// Document execute permissions.
+    /// Execution permissions.
     public let execute: [Any]
 
     /// Function name.
@@ -23,8 +23,8 @@ public class Function {
     /// Function execution runtime.
     public let runtime: String
 
-    /// Function active tag ID.
-    public let tag: String
+    /// Function&#039;s active deployment ID.
+    public let deployment: String
 
     /// Function environment variables.
     public let vars: String
@@ -52,7 +52,7 @@ public class Function {
         dateUpdated: Int,
         status: String,
         runtime: String,
-        tag: String,
+        deployment: String,
         vars: String,
         events: [Any],
         schedule: String,
@@ -67,7 +67,7 @@ public class Function {
         self.dateUpdated = dateUpdated
         self.status = status
         self.runtime = runtime
-        self.tag = tag
+        self.deployment = deployment
         self.vars = vars
         self.events = events
         self.schedule = schedule
@@ -85,7 +85,7 @@ public class Function {
             dateUpdated: map["dateUpdated"] as! Int,
             status: map["status"] as! String,
             runtime: map["runtime"] as! String,
-            tag: map["tag"] as! String,
+            deployment: map["deployment"] as! String,
             vars: map["vars"] as! String,
             events: map["events"] as! [Any],
             schedule: map["schedule"] as! String,
@@ -104,7 +104,7 @@ public class Function {
             "dateUpdated": dateUpdated as Any,
             "status": status as Any,
             "runtime": runtime as Any,
-            "tag": tag as Any,
+            "deployment": deployment as Any,
             "vars": vars as Any,
             "events": events as Any,
             "schedule": schedule as Any,

@@ -8,13 +8,14 @@ func main() {
 
     let storage = Storage(client)
     storage.getFilePreview(
+        bucketId: "[BUCKET_ID]",
         fileId: "[FILE_ID]"
     ) { result in
         switch result {
         case .failure(let error):
             print(error.message)
-        case .success(let byteBuffer):
-            print(String(describing: byteBuffer)
+        case .success(let ):
+            print(String(describing: )
         }
     }
 }

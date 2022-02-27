@@ -126,7 +126,8 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -158,6 +159,7 @@ open class Database: Service {
     /// @param String permission
     /// @param [Any] read
     /// @param [Any] write
+    /// @param Bool enabled
     /// @throws Exception
     /// @return array
     ///
@@ -167,19 +169,22 @@ open class Database: Service {
         permission: String,
         read: [Any]? = nil,
         write: [Any]? = nil,
+        enabled: Bool? = nil,
         completion: ((Result<AppwriteModels.Collection, AppwriteError>) -> Void)? = nil
     ) {
         var path: String = "/database/collections/{collectionId}"
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
             "name": name,
             "permission": permission,
             "read": read,
-            "write": write
+            "write": write,
+            "enabled": enabled
         ]
 
         let headers: [String: String] = [
@@ -218,7 +223,8 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -250,7 +256,8 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -279,7 +286,7 @@ open class Database: Service {
     /// 
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @param Bool required
     /// @param Bool default
     /// @param Bool array
@@ -288,7 +295,7 @@ open class Database: Service {
     ///
     open func createBooleanAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         xrequired: Bool,
         xdefault: Bool? = nil,
         array: Bool? = nil,
@@ -298,10 +305,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "attributeId": attributeId,
+            "key": key,
             "required": xrequired,
             "default": xdefault,
             "array": array
@@ -332,7 +340,7 @@ open class Database: Service {
     /// 
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @param Bool required
     /// @param String default
     /// @param Bool array
@@ -341,7 +349,7 @@ open class Database: Service {
     ///
     open func createEmailAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         xrequired: Bool,
         xdefault: String? = nil,
         array: Bool? = nil,
@@ -351,10 +359,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "attributeId": attributeId,
+            "key": key,
             "required": xrequired,
             "default": xdefault,
             "array": array
@@ -382,7 +391,7 @@ open class Database: Service {
     /// Create Enum Attribute
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @param [Any] elements
     /// @param Bool required
     /// @param String default
@@ -392,7 +401,7 @@ open class Database: Service {
     ///
     open func createEnumAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         elements: [Any],
         xrequired: Bool,
         xdefault: String? = nil,
@@ -403,10 +412,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "attributeId": attributeId,
+            "key": key,
             "elements": elements,
             "required": xrequired,
             "default": xdefault,
@@ -439,22 +449,22 @@ open class Database: Service {
     /// 
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @param Bool required
-    /// @param String min
-    /// @param String max
-    /// @param String default
+    /// @param Double min
+    /// @param Double max
+    /// @param Double default
     /// @param Bool array
     /// @throws Exception
     /// @return array
     ///
     open func createFloatAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         xrequired: Bool,
-        min: String? = nil,
-        max: String? = nil,
-        xdefault: String? = nil,
+        min: Double? = nil,
+        max: Double? = nil,
+        xdefault: Double? = nil,
         array: Bool? = nil,
         completion: ((Result<AppwriteModels.AttributeFloat, AppwriteError>) -> Void)? = nil
     ) {
@@ -462,10 +472,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "attributeId": attributeId,
+            "key": key,
             "required": xrequired,
             "min": min,
             "max": max,
@@ -499,7 +510,7 @@ open class Database: Service {
     /// 
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @param Bool required
     /// @param Int min
     /// @param Int max
@@ -510,7 +521,7 @@ open class Database: Service {
     ///
     open func createIntegerAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         xrequired: Bool,
         min: Int? = nil,
         max: Int? = nil,
@@ -522,10 +533,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "attributeId": attributeId,
+            "key": key,
             "required": xrequired,
             "min": min,
             "max": max,
@@ -558,7 +570,7 @@ open class Database: Service {
     /// 
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @param Bool required
     /// @param String default
     /// @param Bool array
@@ -567,7 +579,7 @@ open class Database: Service {
     ///
     open func createIpAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         xrequired: Bool,
         xdefault: String? = nil,
         array: Bool? = nil,
@@ -577,10 +589,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "attributeId": attributeId,
+            "key": key,
             "required": xrequired,
             "default": xdefault,
             "array": array
@@ -607,11 +620,11 @@ open class Database: Service {
     ///
     /// Create String Attribute
     ///
-    /// Create a new string attribute.
+    /// Create a string attribute.
     /// 
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @param Int size
     /// @param Bool required
     /// @param String default
@@ -621,7 +634,7 @@ open class Database: Service {
     ///
     open func createStringAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         size: Int,
         xrequired: Bool,
         xdefault: String? = nil,
@@ -632,10 +645,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "attributeId": attributeId,
+            "key": key,
             "size": size,
             "required": xrequired,
             "default": xdefault,
@@ -667,7 +681,7 @@ open class Database: Service {
     /// 
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @param Bool required
     /// @param String default
     /// @param Bool array
@@ -676,7 +690,7 @@ open class Database: Service {
     ///
     open func createUrlAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         xrequired: Bool,
         xdefault: String? = nil,
         array: Bool? = nil,
@@ -686,10 +700,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "attributeId": attributeId,
+            "key": key,
             "required": xrequired,
             "default": xdefault,
             "array": array
@@ -717,24 +732,26 @@ open class Database: Service {
     /// Get Attribute
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @throws Exception
     /// @return array
     ///
     open func getAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         completion: ((Result<Any, AppwriteError>) -> Void)? = nil
     ) {
-        var path: String = "/database/collections/{collectionId}/attributes/{attributeId}"
+        var path: String = "/database/collections/{collectionId}/attributes/{key}"
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         path = path.replacingOccurrences(
-          of: "{attributeId}",
-          with: attributeId        )
+          of: "{key}",
+          with: key        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -755,24 +772,26 @@ open class Database: Service {
     /// Delete Attribute
     ///
     /// @param String collectionId
-    /// @param String attributeId
+    /// @param String key
     /// @throws Exception
     /// @return array
     ///
     open func deleteAttribute(
         collectionId: String,
-        attributeId: String,
+        key: String,
         completion: ((Result<Any, AppwriteError>) -> Void)? = nil
     ) {
-        var path: String = "/database/collections/{collectionId}/attributes/{attributeId}"
+        var path: String = "/database/collections/{collectionId}/attributes/{key}"
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         path = path.replacingOccurrences(
-          of: "{attributeId}",
-          with: attributeId        )
+          of: "{key}",
+          with: key        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -823,7 +842,8 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
             "queries": queries,
@@ -881,7 +901,8 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
             "documentId": documentId,
@@ -928,11 +949,13 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         path = path.replacingOccurrences(
           of: "{documentId}",
-          with: documentId        )
+          with: documentId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -980,11 +1003,13 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         path = path.replacingOccurrences(
           of: "{documentId}",
-          with: documentId        )
+          with: documentId        
+        )
 
         let params: [String: Any?] = [
             "data": data,
@@ -1031,11 +1056,13 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         path = path.replacingOccurrences(
           of: "{documentId}",
-          with: documentId        )
+          with: documentId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -1067,7 +1094,8 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -1093,7 +1121,7 @@ open class Database: Service {
     /// Create Index
     ///
     /// @param String collectionId
-    /// @param String indexId
+    /// @param String key
     /// @param String type
     /// @param [Any] attributes
     /// @param [Any] orders
@@ -1102,7 +1130,7 @@ open class Database: Service {
     ///
     open func createIndex(
         collectionId: String,
-        indexId: String,
+        key: String,
         type: String,
         attributes: [Any],
         orders: [Any]? = nil,
@@ -1112,10 +1140,11 @@ open class Database: Service {
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         let params: [String: Any?] = [
-            "indexId": indexId,
+            "key": key,
             "type": type,
             "attributes": attributes,
             "orders": orders
@@ -1143,24 +1172,26 @@ open class Database: Service {
     /// Get Index
     ///
     /// @param String collectionId
-    /// @param String indexId
+    /// @param String key
     /// @throws Exception
     /// @return array
     ///
     open func getIndex(
         collectionId: String,
-        indexId: String,
+        key: String,
         completion: ((Result<AppwriteModels.Index, AppwriteError>) -> Void)? = nil
     ) {
-        var path: String = "/database/collections/{collectionId}/indexes/{indexId}"
+        var path: String = "/database/collections/{collectionId}/indexes/{key}"
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         path = path.replacingOccurrences(
-          of: "{indexId}",
-          with: indexId        )
+          of: "{key}",
+          with: key        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -1186,24 +1217,26 @@ open class Database: Service {
     /// Delete Index
     ///
     /// @param String collectionId
-    /// @param String indexId
+    /// @param String key
     /// @throws Exception
     /// @return array
     ///
     open func deleteIndex(
         collectionId: String,
-        indexId: String,
+        key: String,
         completion: ((Result<Any, AppwriteError>) -> Void)? = nil
     ) {
-        var path: String = "/database/collections/{collectionId}/indexes/{indexId}"
+        var path: String = "/database/collections/{collectionId}/indexes/{key}"
 
         path = path.replacingOccurrences(
           of: "{collectionId}",
-          with: collectionId        )
+          with: collectionId        
+        )
 
         path = path.replacingOccurrences(
-          of: "{indexId}",
-          with: indexId        )
+          of: "{key}",
+          with: key        
+        )
 
         let params: [String: Any?] = [:]
 

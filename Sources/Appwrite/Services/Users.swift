@@ -120,7 +120,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -159,7 +160,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -195,7 +197,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [
             "email": email
@@ -240,7 +243,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [
             "limit": limit,
@@ -284,7 +288,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [
             "name": name
@@ -327,7 +332,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [
             "password": password
@@ -368,7 +374,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -393,8 +400,9 @@ open class Users: Service {
     ///
     /// Update User Preferences
     ///
-    /// Update the user preferences by its unique ID. You can pass only the
-    /// specific settings you wish to update.
+    /// Update the user preferences by its unique ID. The object you pass is stored
+    /// as is, and replaces any previous value. The maximum allowed prefs size is
+    /// 64kB and throws error if exceeded.
     ///
     /// @param String userId
     /// @param Any prefs
@@ -410,7 +418,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [
             "prefs": prefs
@@ -451,7 +460,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -490,7 +500,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -526,11 +537,13 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         path = path.replacingOccurrences(
           of: "{sessionId}",
-          with: sessionId        )
+          with: sessionId        
+        )
 
         let params: [String: Any?] = [:]
 
@@ -566,7 +579,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [
             "status": status
@@ -609,7 +623,8 @@ open class Users: Service {
 
         path = path.replacingOccurrences(
           of: "{userId}",
-          with: userId        )
+          with: userId        
+        )
 
         let params: [String: Any?] = [
             "emailVerification": emailVerification
