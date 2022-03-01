@@ -362,7 +362,7 @@ open class Storage: Service {
         file: File,
         read: [Any]? = nil,
         write: [Any]? = nil,
-        onProgress: ((Double) -> Void)? = nil,
+        onProgress: ((UploadProgress) -> Void)? = nil,
         completion: ((Result<AppwriteModels.File, AppwriteError>) -> Void)? = nil
     ) {
         var path: String = "/storage/buckets/{bucketId}/files"

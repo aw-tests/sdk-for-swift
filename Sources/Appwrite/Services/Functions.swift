@@ -370,7 +370,7 @@ open class Functions: Service {
         entrypoint: String,
         code: File,
         activate: Bool,
-        onProgress: ((Double) -> Void)? = nil,
+        onProgress: ((UploadProgress) -> Void)? = nil,
         completion: ((Result<AppwriteModels.Deployment, AppwriteError>) -> Void)? = nil
     ) {
         var path: String = "/functions/{functionId}/deployments"
