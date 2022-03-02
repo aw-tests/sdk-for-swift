@@ -27,7 +27,7 @@ public class Function {
     public let deployment: String
 
     /// Function environment variables.
-    public let vars: String
+    public let vars: [String : Any]
 
     /// Function trigger events.
     public let events: [Any]
@@ -53,7 +53,7 @@ public class Function {
         status: String,
         runtime: String,
         deployment: String,
-        vars: String,
+        vars: [String : Any],
         events: [Any],
         schedule: String,
         scheduleNext: Int,
@@ -86,7 +86,7 @@ public class Function {
             status: map["status"] as! String,
             runtime: map["runtime"] as! String,
             deployment: map["deployment"] as! String,
-            vars: map["vars"] as! String,
+            vars: map["vars"] as! [String : Any],
             events: map["events"] as! [Any],
             schedule: map["schedule"] as! String,
             scheduleNext: map["scheduleNext"] as! Int,

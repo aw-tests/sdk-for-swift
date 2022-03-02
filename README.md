@@ -2,7 +2,7 @@
 
 ![Swift Package Manager](https://img.shields.io/github/v/release/appwrite/sdk-for-swift.svg?color=green&style=flat-square)
 ![License](https://img.shields.io/github/license/appwrite/sdk-for-swift.svg?style=flat-square)
-![Version](https://img.shields.io/badge/api%20version-0.12.3-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/api%20version-0.13.0-blue.svg?style=flat-square)
 [![Build Status](https://img.shields.io/travis/com/appwrite/sdk-generator?style=flat-square)](https://travis-ci.com/appwrite/sdk-generator)
 [![Twitter Account](https://img.shields.io/twitter/follow/appwrite?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
@@ -44,9 +44,7 @@ Then add it to your target:
         .target(
             name: "YourAppTarget",
             dependencies: [
-                .product(name: "
-Deprecated: preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in /home/dlohani/Documents/projects/appwrite/appwrite_src/vendor/appwrite/sdk-generator/src/SDK/SDK.php on line 745
-", package: "sdk-for-swift")
+                .product(name: "", package: "sdk-for-swift")
             ]
         ),
 ```
