@@ -32,32 +32,6 @@ open class Account: Service {
     }
 
     ///
-    /// Delete Account
-    ///
-    /// Delete a currently logged in user account. Behind the scene, the user
-    /// record is not deleted but permanently blocked from any access. This is done
-    /// to avoid deleted accounts being overtaken by new users with the same email
-    /// address. Any user-related resources like documents or storage files should
-    /// be deleted separately.
-    ///
-    /// @throws Exception
-    /// @return array
-    ///
-    open func delete(
-    ) async throws -> Any {
-        let path: String = "/account"
-        let params: [String: Any?] = [:]
-        let headers: [String: String] = [
-            "content-type": "application/json"
-        ]
-        return try await client.call(
-            method: "DELETE",
-            path: path,
-            headers: headers,
-            params: params        )
-    }
-
-    ///
     /// Update Account Email
     ///
     /// Update currently logged in user account email address. After changing user
@@ -501,6 +475,35 @@ open class Account: Service {
     }
 
     ///
+    /// Update Account Status
+    ///
+    /// Block the currently logged in user account. Behind the scene, the user
+    /// record is not deleted but permanently blocked from any access. To
+    /// completely delete a user, use the Users API instead.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateStatus(
+    ) async throws -> AppwriteModels.User {
+        let path: String = "/account/status"
+        let params: [String: Any?] = [:]
+        let headers: [String: String] = [
+            "content-type": "application/json"
+        ]
+        let converter: ([String: Any]) -> AppwriteModels.User = { dict in
+            return AppwriteModels.User.from(map: dict)
+        }
+        return try await client.call(
+            method: "PATCH",
+            path: path,
+            headers: headers,
+            params: params,
+            converter: converter
+        )
+    }
+
+    ///
     /// Create Email Verification
     ///
     /// Use this endpoint to send a verification message to your user email address
@@ -598,33 +601,6 @@ open class Account: Service {
         Task {
             do {
                 let result = try await get(
-                )
-                completion?(.success(result))
-            } catch {
-                completion?(.failure(error as! AppwriteError))
-            }
-        }
-    }
-
-    ///
-    /// Delete Account
-    ///
-    /// Delete a currently logged in user account. Behind the scene, the user
-    /// record is not deleted but permanently blocked from any access. This is done
-    /// to avoid deleted accounts being overtaken by new users with the same email
-    /// address. Any user-related resources like documents or storage files should
-    /// be deleted separately.
-    ///
-    /// @throws Exception
-    /// @return array
-    ///
-    @available(*, deprecated, message: "Use the async overload instead")
-    open func delete(
-        completion: ((Result<Any, AppwriteError>) -> Void)? = nil
-    ) {
-        Task {
-            do {
-                let result = try await delete(
                 )
                 completion?(.success(result))
             } catch {
@@ -1010,6 +986,31 @@ open class Account: Service {
             do {
                 let result = try await deleteSession(
                     sessionId: sessionId
+                )
+                completion?(.success(result))
+            } catch {
+                completion?(.failure(error as! AppwriteError))
+            }
+        }
+    }
+
+    ///
+    /// Update Account Status
+    ///
+    /// Block the currently logged in user account. Behind the scene, the user
+    /// record is not deleted but permanently blocked from any access. To
+    /// completely delete a user, use the Users API instead.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    @available(*, deprecated, message: "Use the async overload instead")
+    open func updateStatus(
+        completion: ((Result<AppwriteModels.User, AppwriteError>) -> Void)? = nil
+    ) {
+        Task {
+            do {
+                let result = try await updateStatus(
                 )
                 completion?(.success(result))
             } catch {
