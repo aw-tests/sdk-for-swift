@@ -5,6 +5,12 @@ public class Collection {
     /// Collection ID.
     public let id: String
 
+    /// Collection creation date in Unix timestamp.
+    public let createdAt: Int
+
+    /// Collection update date in Unix timestamp.
+    public let updatedAt: Int
+
     /// Collection read permissions.
     public let read: [Any]
 
@@ -28,6 +34,8 @@ public class Collection {
 
     init(
         id: String,
+        createdAt: Int,
+        updatedAt: Int,
         read: [Any],
         write: [Any],
         name: String,
@@ -37,6 +45,8 @@ public class Collection {
         indexes: [Index]
     ) {
         self.id = id
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
         self.read = read
         self.write = write
         self.name = name
@@ -49,6 +59,8 @@ public class Collection {
     public static func from(map: [String: Any]) -> Collection {
         return Collection(
             id: map["$id"] as! String,
+            createdAt: map["$createdAt"] as! Int,
+            updatedAt: map["$updatedAt"] as! Int,
             read: map["$read"] as! [Any],
             write: map["$write"] as! [Any],
             name: map["name"] as! String,
@@ -62,6 +74,8 @@ public class Collection {
     public func toMap() -> [String: Any] {
         return [
             "$id": id as Any,
+            "$createdAt": createdAt as Any,
+            "$updatedAt": updatedAt as Any,
             "$read": read as Any,
             "$write": write as Any,
             "name": name as Any,
@@ -71,5 +85,5 @@ public class Collection {
             "indexes": indexes.map { $0.toMap() } as Any
         ]
     }
-                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                        
 }

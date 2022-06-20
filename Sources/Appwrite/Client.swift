@@ -21,7 +21,7 @@ open class Client {
     open var headers: [String: String] = [
         "content-type": "",
         "x-sdk-version": "appwrite:swift:0.5.0",
-        "X-Appwrite-Response-Format": "0.13.0"
+        "X-Appwrite-Response-Format": "0.15.0"
     ]
 
     open var config: [String: String] = [:]
@@ -323,6 +323,9 @@ open class Client {
                     return response.body as! T
                 default:
                     let data = try await response.body.collect(upTo: Int.max)
+                    if data.readableBytes == 0 {
+                        return true as! T
+                    }
                     let dict = try JSONSerialization.jsonObject(with: data) as? [String: Any]
 
                     return converter?(dict!) ?? dict! as! T
