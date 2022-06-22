@@ -5,12 +5,14 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("5df5acd0d48c2") // Your project ID
       .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
-    let database = Database(client)
-    let attributeFloat = try await database.createFloatAttribute(
+    let databases = Databases(client)
+    let attributeString = try await databases.createStringAttribute(
+        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
         key: "",
+        size: 1,
         required: xfalse
     )
 
-    print(String(describing: attributeFloat)
+    print(String(describing: attributeString)
 }

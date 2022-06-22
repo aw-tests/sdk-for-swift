@@ -17,6 +17,9 @@ public class Collection {
     /// Collection write permissions.
     public let write: [Any]
 
+    /// Database ID.
+    public let databaseId: String
+
     /// Collection name.
     public let name: String
 
@@ -38,6 +41,7 @@ public class Collection {
         updatedAt: Int,
         read: [Any],
         write: [Any],
+        databaseId: String,
         name: String,
         enabled: Bool,
         permission: String,
@@ -49,6 +53,7 @@ public class Collection {
         self.updatedAt = updatedAt
         self.read = read
         self.write = write
+        self.databaseId = databaseId
         self.name = name
         self.enabled = enabled
         self.permission = permission
@@ -63,6 +68,7 @@ public class Collection {
             updatedAt: map["$updatedAt"] as! Int,
             read: map["$read"] as! [Any],
             write: map["$write"] as! [Any],
+            databaseId: map["databaseId"] as! String,
             name: map["name"] as! String,
             enabled: map["enabled"] as! Bool,
             permission: map["permission"] as! String,
@@ -78,6 +84,7 @@ public class Collection {
             "$updatedAt": updatedAt as Any,
             "$read": read as Any,
             "$write": write as Any,
+            "databaseId": databaseId as Any,
             "name": name as Any,
             "enabled": enabled as Any,
             "permission": permission as Any,
@@ -85,5 +92,5 @@ public class Collection {
             "indexes": indexes.map { $0.toMap() } as Any
         ]
     }
-                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                
 }

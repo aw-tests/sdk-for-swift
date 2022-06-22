@@ -5,11 +5,14 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("5df5acd0d48c2") // Your project ID
       .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
-    let database = Database(client)
-    let result = try await database.deleteDocument(
+    let databases = Databases(client)
+    let attributeEnum = try await databases.createEnumAttribute(
+        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
-        documentId: "[DOCUMENT_ID]"
+        key: "",
+        elements: [],
+        required: xfalse
     )
 
-    print(String(describing: result)
+    print(String(describing: attributeEnum)
 }
