@@ -92,5 +92,5 @@ public class Collection {
             "indexes": indexes.map { $0.toMap() } as Any
         ]
     }
-                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                    
 }
