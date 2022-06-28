@@ -65,12 +65,11 @@ open class Databases: Service {
     /// @return array
     ///
     open func create(
-        databaseId: String,
         name: String
     ) async throws -> AppwriteModels.Database {
         let path: String = "/databases"
         let params: [String: Any?] = [
-            "databaseId": databaseId,
+            "databaseId": self.databaseId,
             "name": name
         ]
         let headers: [String: String] = [
@@ -1356,21 +1355,18 @@ open class Databases: Service {
     ///
     /// Create Database
     ///
-    /// @param String databaseId
     /// @param String name
     /// @throws Exception
     /// @return array
     ///
     @available(*, deprecated, message: "Use the async overload instead")
     open func create(
-        databaseId: String,
         name: String,
         completion: ((Result<AppwriteModels.Database, AppwriteError>) -> Void)? = nil
     ) {
         Task {
             do {
                 let result = try await create(
-                    databaseId: databaseId,
                     name: name
                 )
                 completion?(.success(result))
