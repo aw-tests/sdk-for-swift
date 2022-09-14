@@ -5,14 +5,14 @@ public class Execution {
     /// Execution ID.
     public let id: String
 
-    /// Execution creation date in Unix timestamp.
-    public let createdAt: Int
+    /// Execution creation date in ISO 8601 format.
+    public let createdAt: String
 
-    /// Execution update date in Unix timestamp.
-    public let updatedAt: Int
+    /// Execution upate date in ISO 8601 format.
+    public let updatedAt: String
 
-    /// Execution read permissions.
-    public let read: [Any]
+    /// Execution roles.
+    public let permissions: [Any]
 
     /// Function ID.
     public let functionId: String
@@ -29,51 +29,57 @@ public class Execution {
     /// The script response output string. Logs the last 4,000 characters of the execution response output.
     public let response: String
 
-    /// The script stderr output string. Logs the last 4,000 characters of the execution stderr output
+    /// The script stdout output string. Logs the last 4,000 characters of the execution stdout output. This will return an empty string unless the response is returned using an API key or as part of a webhook payload.
+    public let stdout: String
+
+    /// The script stderr output string. Logs the last 4,000 characters of the execution stderr output. This will return an empty string unless the response is returned using an API key or as part of a webhook payload.
     public let stderr: String
 
-    /// The script execution time in seconds.
-    public let time: Double
+    /// The script execution duration in seconds.
+    public let duration: Double
 
     init(
         id: String,
-        createdAt: Int,
-        updatedAt: Int,
-        read: [Any],
+        createdAt: String,
+        updatedAt: String,
+        permissions: [Any],
         functionId: String,
         trigger: String,
         status: String,
         statusCode: Int,
         response: String,
+        stdout: String,
         stderr: String,
-        time: Double
+        duration: Double
     ) {
         self.id = id
         self.createdAt = createdAt
         self.updatedAt = updatedAt
-        self.read = read
+        self.permissions = permissions
         self.functionId = functionId
         self.trigger = trigger
         self.status = status
         self.statusCode = statusCode
         self.response = response
+        self.stdout = stdout
         self.stderr = stderr
-        self.time = time
+        self.duration = duration
     }
 
     public static func from(map: [String: Any]) -> Execution {
         return Execution(
             id: map["$id"] as! String,
-            createdAt: map["$createdAt"] as! Int,
-            updatedAt: map["$updatedAt"] as! Int,
-            read: map["$read"] as! [Any],
+            createdAt: map["$createdAt"] as! String,
+            updatedAt: map["$updatedAt"] as! String,
+            permissions: map["$permissions"] as! [Any],
             functionId: map["functionId"] as! String,
             trigger: map["trigger"] as! String,
             status: map["status"] as! String,
             statusCode: map["statusCode"] as! Int,
             response: map["response"] as! String,
+            stdout: map["stdout"] as! String,
             stderr: map["stderr"] as! String,
-            time: map["time"] as! Double
+            duration: map["duration"] as! Double
         )
     }
 
@@ -82,15 +88,16 @@ public class Execution {
             "$id": id as Any,
             "$createdAt": createdAt as Any,
             "$updatedAt": updatedAt as Any,
-            "$read": read as Any,
+            "$permissions": permissions as Any,
             "functionId": functionId as Any,
             "trigger": trigger as Any,
             "status": status as Any,
             "statusCode": statusCode as Any,
             "response": response as Any,
+            "stdout": stdout as Any,
             "stderr": stderr as Any,
-            "time": time as Any
+            "duration": duration as Any
         ]
     }
-                                                
+                                                    
 }

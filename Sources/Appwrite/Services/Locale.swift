@@ -21,6 +21,7 @@ open class Locale: Service {
     ) async throws -> AppwriteModels.Locale {
         let path: String = "/locale"
         let params: [String: Any?] = [:]
+
         let headers: [String: String] = [
             "content-type": "application/json"
         ]
@@ -45,10 +46,11 @@ open class Locale: Service {
     /// @throws Exception
     /// @return array
     ///
-    open func getContinents(
+    open func listContinents(
     ) async throws -> AppwriteModels.ContinentList {
         let path: String = "/locale/continents"
         let params: [String: Any?] = [:]
+
         let headers: [String: String] = [
             "content-type": "application/json"
         ]
@@ -73,10 +75,11 @@ open class Locale: Service {
     /// @throws Exception
     /// @return array
     ///
-    open func getCountries(
+    open func listCountries(
     ) async throws -> AppwriteModels.CountryList {
         let path: String = "/locale/countries"
         let params: [String: Any?] = [:]
+
         let headers: [String: String] = [
             "content-type": "application/json"
         ]
@@ -101,10 +104,11 @@ open class Locale: Service {
     /// @throws Exception
     /// @return array
     ///
-    open func getCountriesEU(
+    open func listCountriesEU(
     ) async throws -> AppwriteModels.CountryList {
         let path: String = "/locale/countries/eu"
         let params: [String: Any?] = [:]
+
         let headers: [String: String] = [
             "content-type": "application/json"
         ]
@@ -129,10 +133,11 @@ open class Locale: Service {
     /// @throws Exception
     /// @return array
     ///
-    open func getCountriesPhones(
+    open func listCountriesPhones(
     ) async throws -> AppwriteModels.PhoneList {
         let path: String = "/locale/countries/phones"
         let params: [String: Any?] = [:]
+
         let headers: [String: String] = [
             "content-type": "application/json"
         ]
@@ -158,10 +163,11 @@ open class Locale: Service {
     /// @throws Exception
     /// @return array
     ///
-    open func getCurrencies(
+    open func listCurrencies(
     ) async throws -> AppwriteModels.CurrencyList {
         let path: String = "/locale/currencies"
         let params: [String: Any?] = [:]
+
         let headers: [String: String] = [
             "content-type": "application/json"
         ]
@@ -186,10 +192,11 @@ open class Locale: Service {
     /// @throws Exception
     /// @return array
     ///
-    open func getLanguages(
+    open func listLanguages(
     ) async throws -> AppwriteModels.LanguageList {
         let path: String = "/locale/languages"
         let params: [String: Any?] = [:]
+
         let headers: [String: String] = [
             "content-type": "application/json"
         ]
@@ -244,12 +251,12 @@ open class Locale: Service {
     /// @return array
     ///
     @available(*, deprecated, message: "Use the async overload instead")
-    open func getContinents(
+    open func listContinents(
         completion: ((Result<AppwriteModels.ContinentList, AppwriteError>) -> Void)? = nil
     ) {
         Task {
             do {
-                let result = try await getContinents(
+                let result = try await listContinents(
                 )
                 completion?(.success(result))
             } catch {
@@ -268,12 +275,12 @@ open class Locale: Service {
     /// @return array
     ///
     @available(*, deprecated, message: "Use the async overload instead")
-    open func getCountries(
+    open func listCountries(
         completion: ((Result<AppwriteModels.CountryList, AppwriteError>) -> Void)? = nil
     ) {
         Task {
             do {
-                let result = try await getCountries(
+                let result = try await listCountries(
                 )
                 completion?(.success(result))
             } catch {
@@ -292,12 +299,12 @@ open class Locale: Service {
     /// @return array
     ///
     @available(*, deprecated, message: "Use the async overload instead")
-    open func getCountriesEU(
+    open func listCountriesEU(
         completion: ((Result<AppwriteModels.CountryList, AppwriteError>) -> Void)? = nil
     ) {
         Task {
             do {
-                let result = try await getCountriesEU(
+                let result = try await listCountriesEU(
                 )
                 completion?(.success(result))
             } catch {
@@ -316,12 +323,12 @@ open class Locale: Service {
     /// @return array
     ///
     @available(*, deprecated, message: "Use the async overload instead")
-    open func getCountriesPhones(
+    open func listCountriesPhones(
         completion: ((Result<AppwriteModels.PhoneList, AppwriteError>) -> Void)? = nil
     ) {
         Task {
             do {
-                let result = try await getCountriesPhones(
+                let result = try await listCountriesPhones(
                 )
                 completion?(.success(result))
             } catch {
@@ -341,12 +348,12 @@ open class Locale: Service {
     /// @return array
     ///
     @available(*, deprecated, message: "Use the async overload instead")
-    open func getCurrencies(
+    open func listCurrencies(
         completion: ((Result<AppwriteModels.CurrencyList, AppwriteError>) -> Void)? = nil
     ) {
         Task {
             do {
-                let result = try await getCurrencies(
+                let result = try await listCurrencies(
                 )
                 completion?(.success(result))
             } catch {
@@ -365,12 +372,12 @@ open class Locale: Service {
     /// @return array
     ///
     @available(*, deprecated, message: "Use the async overload instead")
-    open func getLanguages(
+    open func listLanguages(
         completion: ((Result<AppwriteModels.LanguageList, AppwriteError>) -> Void)? = nil
     ) {
         Task {
             do {
-                let result = try await getLanguages(
+                let result = try await listLanguages(
                 )
                 completion?(.success(result))
             } catch {
