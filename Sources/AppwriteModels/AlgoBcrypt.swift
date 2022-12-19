@@ -1,19 +1,27 @@
+import Foundation
 
 /// AlgoBcrypt
 public class AlgoBcrypt {
 
-    init(
-    ) {
-    }
+    /// Algo type.
+    public let type: String
 
-    public static func from(map: [String: Any]) -> AlgoBcrypt {
-        return AlgoBcrypt(
-        )
+
+    init(
+        type: String
+    ) {
+        self.type = type
     }
 
     public func toMap() -> [String: Any] {
         return [
+            "type": type as Any
         ]
     }
-    
+
+    public static func from(map: [String: Any] ) -> AlgoBcrypt {
+        return AlgoBcrypt(
+            type: map["type"] as! String
+        )
+    }
 }

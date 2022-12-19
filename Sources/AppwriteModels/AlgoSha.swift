@@ -1,19 +1,27 @@
+import Foundation
 
 /// AlgoSHA
 public class AlgoSha {
 
-    init(
-    ) {
-    }
+    /// Algo type.
+    public let type: String
 
-    public static func from(map: [String: Any]) -> AlgoSha {
-        return AlgoSha(
-        )
+
+    init(
+        type: String
+    ) {
+        self.type = type
     }
 
     public func toMap() -> [String: Any] {
         return [
+            "type": type as Any
         ]
     }
-    
+
+    public static func from(map: [String: Any] ) -> AlgoSha {
+        return AlgoSha(
+            type: map["type"] as! String
+        )
+    }
 }

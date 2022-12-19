@@ -1,19 +1,27 @@
+import Foundation
 
 /// AlgoPHPass
 public class AlgoPhpass {
 
-    init(
-    ) {
-    }
+    /// Algo type.
+    public let type: String
 
-    public static func from(map: [String: Any]) -> AlgoPhpass {
-        return AlgoPhpass(
-        )
+
+    init(
+        type: String
+    ) {
+        self.type = type
     }
 
     public func toMap() -> [String: Any] {
         return [
+            "type": type as Any
         ]
     }
-    
+
+    public static func from(map: [String: Any] ) -> AlgoPhpass {
+        return AlgoPhpass(
+            type: map["type"] as! String
+        )
+    }
 }
