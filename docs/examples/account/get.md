@@ -7,5 +7,5 @@ let client = Client()
 
 let account = Account(client)
 
-let account = try await account.get()
+let user = try await account.get()
 

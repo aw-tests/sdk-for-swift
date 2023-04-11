@@ -1,6 +1,7 @@
 import AsyncHTTPClient
 import Foundation
 import NIO
+import JSONCodable
 import AppwriteModels
 
 /// The Account service allows you to authenticate and manage a user account.
@@ -15,7 +16,8 @@ open class Account: Service {
     /// @return array
     ///
     open func get<T>(
-    ) async throws -> AppwriteModels.Account<T> {
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
         let path: String = "/account"
 
         let params: [String: Any] = [:]
@@ -24,8 +26,8 @@ open class Account: Service {
             "content-type": "application/json"
         ]
 
-        let converter: (Any) -> AppwriteModels.Account<T> = { response in
-            return AppwriteModels.Account.from(map: response as! [String: Any])
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
         }
 
         return try await client.call(
@@ -46,8 +48,9 @@ open class Account: Service {
     /// @return array
     ///
     open func get(
-    ) async throws -> AppwriteModels.Account<[String: AnyCodable]> {
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await get(
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -70,8 +73,9 @@ open class Account: Service {
     ///
     open func updateEmail<T>(
         email: String,
-        password: String
-    ) async throws -> AppwriteModels.Account<T> {
+        password: String,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
         let path: String = "/account/email"
 
         let params: [String: Any?] = [
@@ -83,8 +87,8 @@ open class Account: Service {
             "content-type": "application/json"
         ]
 
-        let converter: (Any) -> AppwriteModels.Account<T> = { response in
-            return AppwriteModels.Account.from(map: response as! [String: Any])
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
         }
 
         return try await client.call(
@@ -116,10 +120,11 @@ open class Account: Service {
     open func updateEmail(
         email: String,
         password: String
-    ) async throws -> AppwriteModels.Account<[String: AnyCodable]> {
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updateEmail(
             email: email,
-            password: password
+            password: password,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -169,8 +174,9 @@ open class Account: Service {
     /// @return array
     ///
     open func updateName<T>(
-        name: String
-    ) async throws -> AppwriteModels.Account<T> {
+        name: String,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
         let path: String = "/account/name"
 
         let params: [String: Any?] = [
@@ -181,8 +187,8 @@ open class Account: Service {
             "content-type": "application/json"
         ]
 
-        let converter: (Any) -> AppwriteModels.Account<T> = { response in
-            return AppwriteModels.Account.from(map: response as! [String: Any])
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
         }
 
         return try await client.call(
@@ -205,9 +211,10 @@ open class Account: Service {
     ///
     open func updateName(
         name: String
-    ) async throws -> AppwriteModels.Account<[String: AnyCodable]> {
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updateName(
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -225,8 +232,9 @@ open class Account: Service {
     ///
     open func updatePassword<T>(
         password: String,
-        oldPassword: String? = nil
-    ) async throws -> AppwriteModels.Account<T> {
+        oldPassword: String? = nil,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
         let path: String = "/account/password"
 
         let params: [String: Any?] = [
@@ -238,8 +246,8 @@ open class Account: Service {
             "content-type": "application/json"
         ]
 
-        let converter: (Any) -> AppwriteModels.Account<T> = { response in
-            return AppwriteModels.Account.from(map: response as! [String: Any])
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
         }
 
         return try await client.call(
@@ -266,10 +274,11 @@ open class Account: Service {
     open func updatePassword(
         password: String,
         oldPassword: String? = nil
-    ) async throws -> AppwriteModels.Account<[String: AnyCodable]> {
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updatePassword(
             password: password,
-            oldPassword: oldPassword
+            oldPassword: oldPassword,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -289,8 +298,9 @@ open class Account: Service {
     ///
     open func updatePhone<T>(
         phone: String,
-        password: String
-    ) async throws -> AppwriteModels.Account<T> {
+        password: String,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
         let path: String = "/account/phone"
 
         let params: [String: Any?] = [
@@ -302,8 +312,8 @@ open class Account: Service {
             "content-type": "application/json"
         ]
 
-        let converter: (Any) -> AppwriteModels.Account<T> = { response in
-            return AppwriteModels.Account.from(map: response as! [String: Any])
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
         }
 
         return try await client.call(
@@ -332,10 +342,11 @@ open class Account: Service {
     open func updatePhone(
         phone: String,
         password: String
-    ) async throws -> AppwriteModels.Account<[String: AnyCodable]> {
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updatePhone(
             phone: phone,
-            password: password
+            password: password,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -348,6 +359,7 @@ open class Account: Service {
     /// @return array
     ///
     open func getPrefs<T>(
+        nestedType: T.Type
     ) async throws -> AppwriteModels.Preferences<T> {
         let path: String = "/account/prefs"
 
@@ -381,6 +393,7 @@ open class Account: Service {
     open func getPrefs(
     ) async throws -> AppwriteModels.Preferences<[String: AnyCodable]> {
         return try await getPrefs(
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -396,8 +409,9 @@ open class Account: Service {
     /// @return array
     ///
     open func updatePrefs<T>(
-        prefs: T
-    ) async throws -> AppwriteModels.Account<T> {
+        prefs: Any,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
         let path: String = "/account/prefs"
 
         let params: [String: Any?] = [
@@ -408,8 +422,8 @@ open class Account: Service {
             "content-type": "application/json"
         ]
 
-        let converter: (Any) -> AppwriteModels.Account<T> = { response in
-            return AppwriteModels.Account.from(map: response as! [String: Any])
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
         }
 
         return try await client.call(
@@ -434,9 +448,10 @@ open class Account: Service {
     ///
     open func updatePrefs(
         prefs: Any
-    ) async throws -> AppwriteModels.Account<[String: AnyCodable]> {
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updatePrefs(
-            prefs: prefs
+            prefs: prefs,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -708,7 +723,8 @@ open class Account: Service {
     /// @return array
     ///
     open func updateStatus<T>(
-    ) async throws -> AppwriteModels.Account<T> {
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
         let path: String = "/account/status"
 
         let params: [String: Any] = [:]
@@ -717,8 +733,8 @@ open class Account: Service {
             "content-type": "application/json"
         ]
 
-        let converter: (Any) -> AppwriteModels.Account<T> = { response in
-            return AppwriteModels.Account.from(map: response as! [String: Any])
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
         }
 
         return try await client.call(
@@ -741,8 +757,9 @@ open class Account: Service {
     /// @return array
     ///
     open func updateStatus(
-    ) async throws -> AppwriteModels.Account<[String: AnyCodable]> {
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updateStatus(
+            nestedType: [String: AnyCodable].self
         )
     }
 

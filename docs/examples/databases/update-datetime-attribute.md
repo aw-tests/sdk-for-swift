@@ -5,9 +5,13 @@ let client = Client()
     .setProject("5df5acd0d48c2") // Your project ID
     .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
 
-let graphql = Graphql(client)
+let databases = Databases(client)
 
-let any = try await graphql.get(
-    query: "[QUERY]"
+let attributeDatetime = try await databases.updateDatetimeAttribute(
+    databaseId: "[DATABASE_ID]",
+    collectionId: "[COLLECTION_ID]",
+    key: "",
+    required: xfalse,
+    default: ""
 )
 

@@ -1,9 +1,9 @@
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS)
 import Foundation
 import UIKit
 
-class iOSDeviceInfo : DeviceInfo {
-    
+class IOSDeviceInfo {
+
     let name: String
     let systemName: String
     let systemVersion: String
@@ -11,37 +11,17 @@ class iOSDeviceInfo : DeviceInfo {
     let localizedModel: String
     let identifierForVendor: String
     let modelIdentifier: String
-    
-    internal init(
-        name: String,
-        systemName: String,
-        systemVersion: String,
-        model: String,
-        localizedModel: String,
-        identifierForVendor: String,
-        modelIdentifier: String
-    ) {
-        self.name = name
-        self.systemName = systemName
-        self.systemVersion = systemVersion
-        self.model = model
-        self.localizedModel = localizedModel
-        self.identifierForVendor = identifierForVendor
-        self.modelIdentifier = modelIdentifier
-    }
 
-    public static func get() -> iOSDeviceInfo {
+    public init() {
         let device = UIDevice.current
-        
-        return iOSDeviceInfo(
-            name: device.name,
-            systemName: device.systemName,
-            systemVersion: device.systemVersion,
-            model: device.model,
-            localizedModel: device.localizedModel,
-            identifierForVendor: device.identifierForVendor?.uuidString ?? "",
-            modelIdentifier: UIDevice.modelName
-        )
+
+        name =  device.name
+        systemName = device.systemName
+        systemVersion = device.systemVersion
+        model = device.model
+        localizedModel = device.localizedModel
+        identifierForVendor = device.identifierForVendor?.uuidString ?? ""
+        modelIdentifier = UIDevice.modelName
     }
 }
 #endif

@@ -1,4 +1,5 @@
 import Foundation
+import JSONCodable
 
 /// User
 public class User<T : Codable> {
@@ -16,13 +17,13 @@ public class User<T : Codable> {
     public let name: String
 
     /// Hashed user password.
-    public let password: String
+    public let password: String??
 
     /// Password hashing algorithm.
-    public let hash: String
+    public let hash: String??
 
     /// Password hashing algorithm configuration.
-    public let hashOptions: Any
+    public let hashOptions: Any??
 
     /// User registration date in ISO 8601 format.
     public let registration: String
@@ -54,9 +55,9 @@ public class User<T : Codable> {
         createdAt: String,
         updatedAt: String,
         name: String,
-        password: String,
-        hash: String,
-        hashOptions: Any,
+        password: String??,
+        hash: String??,
+        hashOptions: Any??,
         registration: String,
         status: Bool,
         passwordUpdate: String,
@@ -109,9 +110,9 @@ public class User<T : Codable> {
             createdAt: map["$createdAt"] as! String,
             updatedAt: map["$updatedAt"] as! String,
             name: map["name"] as! String,
-            password: map["password"] as! String,
-            hash: map["hash"] as! String,
-            hashOptions: map["hashOptions"] as! Any,
+            password: map["password"] as? String?,
+            hash: map["hash"] as? String?,
+            hashOptions: map["hashOptions"] as? Any?,
             registration: map["registration"] as! String,
             status: map["status"] as! Bool,
             passwordUpdate: map["passwordUpdate"] as! String,

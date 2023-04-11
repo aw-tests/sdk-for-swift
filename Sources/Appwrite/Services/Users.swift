@@ -1,6 +1,7 @@
 import AsyncHTTPClient
 import Foundation
 import NIO
+import JSONCodable
 import AppwriteModels
 
 /// The Users service allows you to manage your project users.
@@ -19,7 +20,8 @@ open class Users: Service {
     ///
     open func list<T>(
         queries: [String]? = nil,
-        search: String? = nil
+        search: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.UserList<T> {
         let path: String = "/users"
 
@@ -62,7 +64,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.UserList<[String: AnyCodable]> {
         return try await list(
             queries: queries,
-            search: search
+            search: search,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -84,7 +87,8 @@ open class Users: Service {
         email: String? = nil,
         phone: String? = nil,
         password: String? = nil,
-        name: String? = nil
+        name: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users"
 
@@ -138,7 +142,8 @@ open class Users: Service {
             email: email,
             phone: phone,
             password: password,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -161,7 +166,8 @@ open class Users: Service {
         userId: String,
         email: String,
         password: String,
-        name: String? = nil
+        name: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/argon2"
 
@@ -214,7 +220,8 @@ open class Users: Service {
             userId: userId,
             email: email,
             password: password,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -237,7 +244,8 @@ open class Users: Service {
         userId: String,
         email: String,
         password: String,
-        name: String? = nil
+        name: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/bcrypt"
 
@@ -290,7 +298,8 @@ open class Users: Service {
             userId: userId,
             email: email,
             password: password,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -313,7 +322,8 @@ open class Users: Service {
         userId: String,
         email: String,
         password: String,
-        name: String? = nil
+        name: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/md5"
 
@@ -366,7 +376,8 @@ open class Users: Service {
             userId: userId,
             email: email,
             password: password,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -389,7 +400,8 @@ open class Users: Service {
         userId: String,
         email: String,
         password: String,
-        name: String? = nil
+        name: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/phpass"
 
@@ -442,7 +454,8 @@ open class Users: Service {
             userId: userId,
             email: email,
             password: password,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -475,7 +488,8 @@ open class Users: Service {
         passwordMemory: Int,
         passwordParallel: Int,
         passwordLength: Int,
-        name: String? = nil
+        name: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/scrypt"
 
@@ -548,7 +562,8 @@ open class Users: Service {
             passwordMemory: passwordMemory,
             passwordParallel: passwordParallel,
             passwordLength: passwordLength,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -577,7 +592,8 @@ open class Users: Service {
         passwordSalt: String,
         passwordSaltSeparator: String,
         passwordSignerKey: String,
-        name: String? = nil
+        name: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/scrypt-modified"
 
@@ -642,7 +658,8 @@ open class Users: Service {
             passwordSalt: passwordSalt,
             passwordSaltSeparator: passwordSaltSeparator,
             passwordSignerKey: passwordSignerKey,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -667,7 +684,8 @@ open class Users: Service {
         email: String,
         password: String,
         passwordVersion: String? = nil,
-        name: String? = nil
+        name: String? = nil,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/sha"
 
@@ -724,7 +742,8 @@ open class Users: Service {
             email: email,
             password: password,
             passwordVersion: passwordVersion,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -738,7 +757,8 @@ open class Users: Service {
     /// @return array
     ///
     open func get<T>(
-        userId: String
+        userId: String,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/{userId}"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -775,7 +795,8 @@ open class Users: Service {
         userId: String
     ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await get(
-            userId: userId
+            userId: userId,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -823,7 +844,8 @@ open class Users: Service {
     ///
     open func updateEmail<T>(
         userId: String,
-        email: String
+        email: String,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/{userId}/email"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -865,7 +887,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updateEmail(
             userId: userId,
-            email: email
+            email: email,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -953,7 +976,8 @@ open class Users: Service {
     ///
     open func updateName<T>(
         userId: String,
-        name: String
+        name: String,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/{userId}/name"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -995,7 +1019,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updateName(
             userId: userId,
-            name: name
+            name: name,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -1011,7 +1036,8 @@ open class Users: Service {
     ///
     open func updatePassword<T>(
         userId: String,
-        password: String
+        password: String,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/{userId}/password"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -1053,7 +1079,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updatePassword(
             userId: userId,
-            password: password
+            password: password,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -1069,7 +1096,8 @@ open class Users: Service {
     ///
     open func updatePhone<T>(
         userId: String,
-        number: String
+        number: String,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/{userId}/phone"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -1111,7 +1139,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updatePhone(
             userId: userId,
-            number: number
+            number: number,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -1125,7 +1154,8 @@ open class Users: Service {
     /// @return array
     ///
     open func getPrefs<T>(
-        userId: String
+        userId: String,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.Preferences<T> {
         let path: String = "/users/{userId}/prefs"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -1162,7 +1192,8 @@ open class Users: Service {
         userId: String
     ) async throws -> AppwriteModels.Preferences<[String: AnyCodable]> {
         return try await getPrefs(
-            userId: userId
+            userId: userId,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -1180,7 +1211,8 @@ open class Users: Service {
     ///
     open func updatePrefs<T>(
         userId: String,
-        prefs: T
+        prefs: Any,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.Preferences<T> {
         let path: String = "/users/{userId}/prefs"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -1224,7 +1256,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.Preferences<[String: AnyCodable]> {
         return try await updatePrefs(
             userId: userId,
-            prefs: prefs
+            prefs: prefs,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -1334,7 +1367,8 @@ open class Users: Service {
     ///
     open func updateStatus<T>(
         userId: String,
-        status: Bool
+        status: Bool,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/{userId}/status"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -1377,7 +1411,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updateStatus(
             userId: userId,
-            status: status
+            status: status,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -1393,7 +1428,8 @@ open class Users: Service {
     ///
     open func updateEmailVerification<T>(
         userId: String,
-        emailVerification: Bool
+        emailVerification: Bool,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/{userId}/verification"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -1435,7 +1471,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updateEmailVerification(
             userId: userId,
-            emailVerification: emailVerification
+            emailVerification: emailVerification,
+            nestedType: [String: AnyCodable].self
         )
     }
 
@@ -1451,7 +1488,8 @@ open class Users: Service {
     ///
     open func updatePhoneVerification<T>(
         userId: String,
-        phoneVerification: Bool
+        phoneVerification: Bool,
+        nestedType: T.Type
     ) async throws -> AppwriteModels.User<T> {
         let path: String = "/users/{userId}/verification/phone"
             .replacingOccurrences(of: "{userId}", with: userId)
@@ -1493,7 +1531,8 @@ open class Users: Service {
     ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
         return try await updatePhoneVerification(
             userId: userId,
-            phoneVerification: phoneVerification
+            phoneVerification: phoneVerification,
+            nestedType: [String: AnyCodable].self
         )
     }
 

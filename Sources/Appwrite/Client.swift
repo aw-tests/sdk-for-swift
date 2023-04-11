@@ -23,7 +23,7 @@ open class Client {
         "x-sdk-name": "Swift",
         "x-sdk-platform": "server",
         "x-sdk-language": "swift",
-        "x-sdk-version": "1.1.0",
+        "x-sdk-version": "1.2.0",
         "X-Appwrite-Response-Format": "1.0.0"
     ]
 
@@ -461,7 +461,28 @@ open class Client {
         _ request: inout HTTPClientRequest,
         with params: [String: Any?] = [:]
     ) throws {
-        let json = try JSONSerialization.data(withJSONObject: params, options: [])
+        var encodedParams = [String:Any]()
+
+        for (key, param) in params {
+            if param is String
+                || param is Int
+                || param is Float
+                || param is Bool
+                || param is [String]
+                || param is [Int]
+                || param is [Float]
+                || param is [Bool]
+                || param is [String: Any]
+                || param is [Int: Any]
+                || param is [Float: Any]
+                || param is [Bool: Any] {
+                encodedParams[key] = param
+            } else {
+                encodedParams[key] = try! (param as! Encodable).toJson()
+            }
+        }
+
+        let json = try JSONSerialization.data(withJSONObject: encodedParams, options: [])
 
         request.body = .bytes(json)
     }
@@ -576,10 +597,10 @@ extension Client {
         device = "\(info!.modelIdentifier) iOS/\(info!.systemVersion)"
         #elseif os(watchOS)
         let info = deviceInfo.watchOSInfo
-        device = "\(info!.systemInfo.machine) watchOS/\(info!.systemVersion)"
+        device = "\(info!.modelIdentifier) watchOS/\(info!.systemVersion)"
         #elseif os(tvOS)
-        let info = deviceInfo.tvOSInfo
-        device = "\(info!.systemInfo.machine) tvOS/\(info!.systemVersion)"
+        let info = deviceInfo.iOSInfo
+        device = "\(info!.modelIdentifier) tvOS/\(info!.systemVersion)"
         #elseif os(macOS)
         let info = deviceInfo.macOSInfo
         device = "(Macintosh; \(info!.model))"
