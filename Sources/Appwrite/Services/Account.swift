@@ -1,0 +1,1002 @@
+import AsyncHTTPClient
+import Foundation
+import NIO
+import JSONCodable
+import AppwriteEnums
+import AppwriteModels
+
+/// The Account service allows you to authenticate and manage a user account.
+open class Account: Service {
+
+    ///
+    /// Get account
+    ///
+    /// Get the currently logged in user.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func get<T>(
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
+        let apiPath: String = "/account"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Get account
+    ///
+    /// Get the currently logged in user.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func get(
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
+        return try await get(
+            nestedType: [String: AnyCodable].self
+        )
+    }
+
+    ///
+    /// Update email
+    ///
+    /// Update currently logged in user account email address. After changing user
+    /// address, the user confirmation status will get reset. A new confirmation
+    /// email is not sent automatically however you can use the send confirmation
+    /// email endpoint again to send the confirmation email. For security measures,
+    /// user password is required to complete this request.
+    /// This endpoint can also be used to convert an anonymous account to a normal
+    /// one, by passing an email address and a new password.
+    /// 
+    ///
+    /// @param String email
+    /// @param String password
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateEmail<T>(
+        email: String,
+        password: String,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
+        let apiPath: String = "/account/email"
+
+        let apiParams: [String: Any?] = [
+            "email": email,
+            "password": password
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PATCH",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Update email
+    ///
+    /// Update currently logged in user account email address. After changing user
+    /// address, the user confirmation status will get reset. A new confirmation
+    /// email is not sent automatically however you can use the send confirmation
+    /// email endpoint again to send the confirmation email. For security measures,
+    /// user password is required to complete this request.
+    /// This endpoint can also be used to convert an anonymous account to a normal
+    /// one, by passing an email address and a new password.
+    /// 
+    ///
+    /// @param String email
+    /// @param String password
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateEmail(
+        email: String,
+        password: String
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
+        return try await updateEmail(
+            email: email,
+            password: password,
+            nestedType: [String: AnyCodable].self
+        )
+    }
+
+    ///
+    /// List Identities
+    ///
+    /// Get the list of identities for the currently logged in user.
+    ///
+    /// @param String queries
+    /// @throws Exception
+    /// @return array
+    ///
+    open func listIdentities(
+        queries: String? = nil
+    ) async throws -> AppwriteModels.IdentityList {
+        let apiPath: String = "/account/identities"
+
+        let apiParams: [String: Any?] = [
+            "queries": queries
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.IdentityList = { response in
+            return AppwriteModels.IdentityList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Delete Identity
+    ///
+    /// Delete an identity by its unique ID.
+    ///
+    /// @param String identityId
+    /// @throws Exception
+    /// @return array
+    ///
+    open func deleteIdentity(
+        identityId: String
+    ) async throws -> Any {
+        let apiPath: String = "/account/identities/{identityId}"
+            .replacingOccurrences(of: "{identityId}", with: identityId)
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        return try await client.call(
+            method: "DELETE",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams        )
+    }
+
+    ///
+    /// List logs
+    ///
+    /// Get the list of latest security activity logs for the currently logged in
+    /// user. Each log returns user IP address, location and date and time of log.
+    ///
+    /// @param [String] queries
+    /// @throws Exception
+    /// @return array
+    ///
+    open func listLogs(
+        queries: [String]? = nil
+    ) async throws -> AppwriteModels.LogList {
+        let apiPath: String = "/account/logs"
+
+        let apiParams: [String: Any?] = [
+            "queries": queries
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.LogList = { response in
+            return AppwriteModels.LogList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Update name
+    ///
+    /// Update currently logged in user account name.
+    ///
+    /// @param String name
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateName<T>(
+        name: String,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
+        let apiPath: String = "/account/name"
+
+        let apiParams: [String: Any?] = [
+            "name": name
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PATCH",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Update name
+    ///
+    /// Update currently logged in user account name.
+    ///
+    /// @param String name
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateName(
+        name: String
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
+        return try await updateName(
+            name: name,
+            nestedType: [String: AnyCodable].self
+        )
+    }
+
+    ///
+    /// Update password
+    ///
+    /// Update currently logged in user password. For validation, user is required
+    /// to pass in the new password, and the old password. For users created with
+    /// OAuth, Team Invites and Magic URL, oldPassword is optional.
+    ///
+    /// @param String password
+    /// @param String oldPassword
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updatePassword<T>(
+        password: String,
+        oldPassword: String? = nil,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
+        let apiPath: String = "/account/password"
+
+        let apiParams: [String: Any?] = [
+            "password": password,
+            "oldPassword": oldPassword
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PATCH",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Update password
+    ///
+    /// Update currently logged in user password. For validation, user is required
+    /// to pass in the new password, and the old password. For users created with
+    /// OAuth, Team Invites and Magic URL, oldPassword is optional.
+    ///
+    /// @param String password
+    /// @param String oldPassword
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updatePassword(
+        password: String,
+        oldPassword: String? = nil
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
+        return try await updatePassword(
+            password: password,
+            oldPassword: oldPassword,
+            nestedType: [String: AnyCodable].self
+        )
+    }
+
+    ///
+    /// Update phone
+    ///
+    /// Update the currently logged in user's phone number. After updating the
+    /// phone number, the phone verification status will be reset. A confirmation
+    /// SMS is not sent automatically, however you can use the [POST
+    /// /account/verification/phone](https://appwrite.io/docs/references/cloud/client-web/account#createPhoneVerification)
+    /// endpoint to send a confirmation SMS.
+    ///
+    /// @param String phone
+    /// @param String password
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updatePhone<T>(
+        phone: String,
+        password: String,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
+        let apiPath: String = "/account/phone"
+
+        let apiParams: [String: Any?] = [
+            "phone": phone,
+            "password": password
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PATCH",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Update phone
+    ///
+    /// Update the currently logged in user's phone number. After updating the
+    /// phone number, the phone verification status will be reset. A confirmation
+    /// SMS is not sent automatically, however you can use the [POST
+    /// /account/verification/phone](https://appwrite.io/docs/references/cloud/client-web/account#createPhoneVerification)
+    /// endpoint to send a confirmation SMS.
+    ///
+    /// @param String phone
+    /// @param String password
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updatePhone(
+        phone: String,
+        password: String
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
+        return try await updatePhone(
+            phone: phone,
+            password: password,
+            nestedType: [String: AnyCodable].self
+        )
+    }
+
+    ///
+    /// Get account preferences
+    ///
+    /// Get the preferences as a key-value object for the currently logged in user.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func getPrefs<T>(
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.Preferences<T> {
+        let apiPath: String = "/account/prefs"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Preferences<T> = { response in
+            return AppwriteModels.Preferences.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Get account preferences
+    ///
+    /// Get the preferences as a key-value object for the currently logged in user.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func getPrefs(
+    ) async throws -> AppwriteModels.Preferences<[String: AnyCodable]> {
+        return try await getPrefs(
+            nestedType: [String: AnyCodable].self
+        )
+    }
+
+    ///
+    /// Update preferences
+    ///
+    /// Update currently logged in user account preferences. The object you pass is
+    /// stored as is, and replaces any previous value. The maximum allowed prefs
+    /// size is 64kB and throws error if exceeded.
+    ///
+    /// @param Any prefs
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updatePrefs<T>(
+        prefs: Any,
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
+        let apiPath: String = "/account/prefs"
+
+        let apiParams: [String: Any?] = [
+            "prefs": prefs
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PATCH",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Update preferences
+    ///
+    /// Update currently logged in user account preferences. The object you pass is
+    /// stored as is, and replaces any previous value. The maximum allowed prefs
+    /// size is 64kB and throws error if exceeded.
+    ///
+    /// @param Any prefs
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updatePrefs(
+        prefs: Any
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
+        return try await updatePrefs(
+            prefs: prefs,
+            nestedType: [String: AnyCodable].self
+        )
+    }
+
+    ///
+    /// Create password recovery
+    ///
+    /// Sends the user an email with a temporary secret key for password reset.
+    /// When the user clicks the confirmation link he is redirected back to your
+    /// app password reset URL with the secret key and email address values
+    /// attached to the URL query string. Use the query string params to submit a
+    /// request to the [PUT
+    /// /account/recovery](https://appwrite.io/docs/references/cloud/client-web/account#updateRecovery)
+    /// endpoint to complete the process. The verification link sent to the user's
+    /// email address is valid for 1 hour.
+    ///
+    /// @param String email
+    /// @param String url
+    /// @throws Exception
+    /// @return array
+    ///
+    open func createRecovery(
+        email: String,
+        url: String
+    ) async throws -> AppwriteModels.Token {
+        let apiPath: String = "/account/recovery"
+
+        let apiParams: [String: Any?] = [
+            "email": email,
+            "url": url
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Token = { response in
+            return AppwriteModels.Token.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "POST",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Create password recovery (confirmation)
+    ///
+    /// Use this endpoint to complete the user account password reset. Both the
+    /// **userId** and **secret** arguments will be passed as query parameters to
+    /// the redirect URL you have provided when sending your request to the [POST
+    /// /account/recovery](https://appwrite.io/docs/references/cloud/client-web/account#createRecovery)
+    /// endpoint.
+    /// 
+    /// Please note that in order to avoid a [Redirect
+    /// Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md)
+    /// the only valid redirect URLs are the ones from domains you have set when
+    /// adding your platforms in the console interface.
+    ///
+    /// @param String userId
+    /// @param String secret
+    /// @param String password
+    /// @param String passwordAgain
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateRecovery(
+        userId: String,
+        secret: String,
+        password: String,
+        passwordAgain: String
+    ) async throws -> AppwriteModels.Token {
+        let apiPath: String = "/account/recovery"
+
+        let apiParams: [String: Any?] = [
+            "userId": userId,
+            "secret": secret,
+            "password": password,
+            "passwordAgain": passwordAgain
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Token = { response in
+            return AppwriteModels.Token.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PUT",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// List sessions
+    ///
+    /// Get the list of active sessions across different devices for the currently
+    /// logged in user.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func listSessions(
+    ) async throws -> AppwriteModels.SessionList {
+        let apiPath: String = "/account/sessions"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.SessionList = { response in
+            return AppwriteModels.SessionList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Delete sessions
+    ///
+    /// Delete all sessions from the user account and remove any sessions cookies
+    /// from the end client.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func deleteSessions(
+    ) async throws -> Any {
+        let apiPath: String = "/account/sessions"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        return try await client.call(
+            method: "DELETE",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams        )
+    }
+
+    ///
+    /// Get session
+    ///
+    /// Use this endpoint to get a logged in user's session using a Session ID.
+    /// Inputting 'current' will return the current session being used.
+    ///
+    /// @param String sessionId
+    /// @throws Exception
+    /// @return array
+    ///
+    open func getSession(
+        sessionId: String
+    ) async throws -> AppwriteModels.Session {
+        let apiPath: String = "/account/sessions/{sessionId}"
+            .replacingOccurrences(of: "{sessionId}", with: sessionId)
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Session = { response in
+            return AppwriteModels.Session.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Update OAuth session (refresh tokens)
+    ///
+    /// Access tokens have limited lifespan and expire to mitigate security risks.
+    /// If session was created using an OAuth provider, this route can be used to
+    /// "refresh" the access token.
+    ///
+    /// @param String sessionId
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateSession(
+        sessionId: String
+    ) async throws -> AppwriteModels.Session {
+        let apiPath: String = "/account/sessions/{sessionId}"
+            .replacingOccurrences(of: "{sessionId}", with: sessionId)
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Session = { response in
+            return AppwriteModels.Session.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PATCH",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Delete session
+    ///
+    /// Logout the user. Use 'current' as the session ID to logout on this device,
+    /// use a session ID to logout on another device. If you're looking to logout
+    /// the user on all devices, use [Delete
+    /// Sessions](https://appwrite.io/docs/references/cloud/client-web/account#deleteSessions)
+    /// instead.
+    ///
+    /// @param String sessionId
+    /// @throws Exception
+    /// @return array
+    ///
+    open func deleteSession(
+        sessionId: String
+    ) async throws -> Any {
+        let apiPath: String = "/account/sessions/{sessionId}"
+            .replacingOccurrences(of: "{sessionId}", with: sessionId)
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        return try await client.call(
+            method: "DELETE",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams        )
+    }
+
+    ///
+    /// Update status
+    ///
+    /// Block the currently logged in user account. Behind the scene, the user
+    /// record is not deleted but permanently blocked from any access. To
+    /// completely delete a user, use the Users API instead.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateStatus<T>(
+        nestedType: T.Type
+    ) async throws -> AppwriteModels.User<T> {
+        let apiPath: String = "/account/status"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.User<T> = { response in
+            return AppwriteModels.User.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PATCH",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Update status
+    ///
+    /// Block the currently logged in user account. Behind the scene, the user
+    /// record is not deleted but permanently blocked from any access. To
+    /// completely delete a user, use the Users API instead.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateStatus(
+    ) async throws -> AppwriteModels.User<[String: AnyCodable]> {
+        return try await updateStatus(
+            nestedType: [String: AnyCodable].self
+        )
+    }
+
+    ///
+    /// Create email verification
+    ///
+    /// Use this endpoint to send a verification message to your user email address
+    /// to confirm they are the valid owners of that address. Both the **userId**
+    /// and **secret** arguments will be passed as query parameters to the URL you
+    /// have provided to be attached to the verification email. The provided URL
+    /// should redirect the user back to your app and allow you to complete the
+    /// verification process by verifying both the **userId** and **secret**
+    /// parameters. Learn more about how to [complete the verification
+    /// process](https://appwrite.io/docs/references/cloud/client-web/account#updateVerification).
+    /// The verification link sent to the user's email address is valid for 7 days.
+    /// 
+    /// Please note that in order to avoid a [Redirect
+    /// Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md),
+    /// the only valid redirect URLs are the ones from domains you have set when
+    /// adding your platforms in the console interface.
+    /// 
+    ///
+    /// @param String url
+    /// @throws Exception
+    /// @return array
+    ///
+    open func createVerification(
+        url: String
+    ) async throws -> AppwriteModels.Token {
+        let apiPath: String = "/account/verification"
+
+        let apiParams: [String: Any?] = [
+            "url": url
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Token = { response in
+            return AppwriteModels.Token.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "POST",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Create email verification (confirmation)
+    ///
+    /// Use this endpoint to complete the user email verification process. Use both
+    /// the **userId** and **secret** parameters that were attached to your app URL
+    /// to verify the user email ownership. If confirmed this route will return a
+    /// 200 status code.
+    ///
+    /// @param String userId
+    /// @param String secret
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updateVerification(
+        userId: String,
+        secret: String
+    ) async throws -> AppwriteModels.Token {
+        let apiPath: String = "/account/verification"
+
+        let apiParams: [String: Any?] = [
+            "userId": userId,
+            "secret": secret
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Token = { response in
+            return AppwriteModels.Token.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PUT",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Create phone verification
+    ///
+    /// Use this endpoint to send a verification SMS to the currently logged in
+    /// user. This endpoint is meant for use after updating a user's phone number
+    /// using the
+    /// [accountUpdatePhone](https://appwrite.io/docs/references/cloud/client-web/account#updatePhone)
+    /// endpoint. Learn more about how to [complete the verification
+    /// process](https://appwrite.io/docs/references/cloud/client-web/account#updatePhoneVerification).
+    /// The verification code sent to the user's phone number is valid for 15
+    /// minutes.
+    ///
+    /// @throws Exception
+    /// @return array
+    ///
+    open func createPhoneVerification(
+    ) async throws -> AppwriteModels.Token {
+        let apiPath: String = "/account/verification/phone"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Token = { response in
+            return AppwriteModels.Token.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "POST",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// Create phone verification (confirmation)
+    ///
+    /// Use this endpoint to complete the user phone verification process. Use the
+    /// **userId** and **secret** that were sent to your user's phone number to
+    /// verify the user email ownership. If confirmed this route will return a 200
+    /// status code.
+    ///
+    /// @param String userId
+    /// @param String secret
+    /// @throws Exception
+    /// @return array
+    ///
+    open func updatePhoneVerification(
+        userId: String,
+        secret: String
+    ) async throws -> AppwriteModels.Token {
+        let apiPath: String = "/account/verification/phone"
+
+        let apiParams: [String: Any?] = [
+            "userId": userId,
+            "secret": secret
+        ]
+
+        let apiHeaders: [String: String] = [
+            "content-type": "application/json"
+        ]
+
+        let converter: (Any) -> AppwriteModels.Token = { response in
+            return AppwriteModels.Token.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "PUT",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+
+}
